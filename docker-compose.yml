@@ -34,8 +34,9 @@ services:
       # Region
       TZ: "Asia/Manila"
 
-    volumes:
-      - bedrock_data:/data
+      volumes:
+        - ./data:/data
+        - ./packs:/packs:ro
+        - ./entrypoint.sh:/entrypoint.sh:ro
 
-volumes:
-  bedrock_data:
+      entrypoint: ["/bin/bash", "/entrypoint.sh"]
