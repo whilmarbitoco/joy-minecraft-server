@@ -12,31 +12,24 @@ services:
     environment:
       EULA: "TRUE"
 
-      # Server identity
       SERVER_NAME: "Joy Minecraft"
-
-      # Gameplay settings
       GAMEMODE: "survival"
       DIFFICULTY: "normal"
       MAX_PLAYERS: "10"
       ONLINE_MODE: "true"
 
-      # World settings
       LEVEL_NAME: "world"
       LEVEL_SEED: "888880777356331877"
 
-      # Performance / system
       VIEW_DISTANCE: "16"
       TICK_DISTANCE: "4"
       ALLOW_CHEATS: "false"
-      MC_VERSION: 1.21.8
 
-      # Region
       TZ: "Asia/Manila"
 
-  volumes:
-    - ./data:/data
-    - ./packs:/packs:ro
-    - ./entrypoint.sh:/entrypoint.sh:ro
+    volumes:
+      - ./data:/data
+      - ./packs:/packs:ro
+      - ./entrypoint.sh:/entrypoint.sh:ro
 
-  entrypoint: ["/bin/bash", "/entrypoint.sh"]
+    entrypoint: ["/bin/bash", "/entrypoint.sh"]
