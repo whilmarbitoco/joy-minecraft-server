@@ -34,9 +34,9 @@ services:
       # Region
       TZ: "Asia/Manila"
 
-      volumes:
-        - ./data:/data
-        - ./packs:/packs:ro
-        - ./entrypoint.sh:/entrypoint.sh:ro
+  volumes:
+    - ./data:/data
+    - ./packs:/packs:ro
+    - ./entrypoint.sh:/entrypoint.sh:ro
 
-      entrypoint: ["/bin/bash", "/entrypoint.sh"]
+  entrypoint: ["/bin/bash", "/entrypoint.sh"]
