@@ -11,7 +11,30 @@ services:
 
     environment:
       EULA: "TRUE"
+
+      # Server identity
+      SERVER_NAME: "Joy Minecraft"
+
+      # Gameplay settings
+      GAMEMODE: "survival"
+      DIFFICULTY: "normal"
+      MAX_PLAYERS: "10"
+      ONLINE_MODE: "true"
+
+      # World settings
+      LEVEL_NAME: "world"
+      LEVEL_SEED: "888880777356331877"
+
+      # Performance / system
+      VIEW_DISTANCE: "16"
+      TICK_DISTANCE: "4"
+      ALLOW_CHEATS: "false"
+
+      # Region
       TZ: "Asia/Manila"
 
     volumes:
-      - ./data:/data
+      - bedrock_data:/data
+
+volumes:
+  bedrock_data:
