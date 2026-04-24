@@ -51,4 +51,4 @@ echo "Packs installed."
 
 echo "Starting server..."
 
-exec /usr/local/bin/start.sh
+exec /opt/bedrock-entry.sh

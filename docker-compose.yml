@@ -31,4 +31,4 @@ services:
       - ./data:/data
       - ./packs:/packs:ro
 
-    entrypoint: ["/bin/bash", "/entrypoint.sh"]
+    entrypoint: ["/usr/local/bin/entrypoint-demoter", "--match", "/data", "--debug", "--stdin-on-term", "stop", "/entrypoint.sh"]
