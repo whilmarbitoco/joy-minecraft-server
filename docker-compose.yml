@@ -29,6 +29,7 @@ services:
       VIEW_DISTANCE: "16"
       TICK_DISTANCE: "4"
       ALLOW_CHEATS: "false"
+      MC_VERSION: 1.21.8
 
       # Region
       TZ: "Asia/Manila"
