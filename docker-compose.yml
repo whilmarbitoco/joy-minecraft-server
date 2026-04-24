@@ -1,8 +1,8 @@
-version: "3.8"
-
 services:
   bedrock:
-    image: itzg/minecraft-bedrock-server:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: bedrock-server
     restart: unless-stopped
 
@@ -30,6 +30,5 @@ services:
     volumes:
       - ./data:/data
       - ./packs:/packs:ro
-      - ./entrypoint.sh:/entrypoint.sh:ro
 
     entrypoint: ["/bin/bash", "/entrypoint.sh"]
