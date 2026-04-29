@@ -120,6 +120,8 @@ if command -v send-command >/dev/null 2>&1; then
     echo "Applying gamerules..."
     send-command gamerule showcoordinates true || echo "WARN: failed to set showcoordinates"
     send-command gamerule mobgriefing false || echo "WARN: failed to set mobgriefing"
+    echo "Adding operator..."
+    send-command op "PH PH03NIX" || echo "WARN: failed to op player"
   ) &
 fi
 
