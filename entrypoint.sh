@@ -42,16 +42,13 @@ for file in /packs/*; do
   echo "Processing $file"
 
   tmp="$(mktemp -d /tmp/pack.XXXXXX)"
-
   unzip -o "$file" -d "$tmp" >/dev/null
 
-  # Find every manifest in the archive (covers nested-folder mcpack layouts).
   while IFS= read -r manifest; do
     install_pack_from_manifest "$manifest"
   done < <(find "$tmp" -type f -name manifest.json)
 
   rm -rf "$tmp"
-
 done
 
 echo "Packs installed."
@@ -105,6 +102,29 @@ else
   echo "Restart once after first world creation so packs can be attached automatically."
 fi
 
+# --- Ensure operator via permissions.json (XUID-based) ---
+PERMISSIONS_FILE="/data/permissions.json"
+
+echo "Ensuring operator permissions..."
+
+if [ -f "$PERMISSIONS_FILE" ]; then
+  tmp="$(mktemp)"
+  jq 'if any(.[]; .xuid=="2535439809227743")
+      then .
+      else . + [{"permission":"operator","xuid":"2535439809227743"}]
+      end' "$PERMISSIONS_FILE" > "$tmp" && mv "$tmp" "$PERMISSIONS_FILE"
+else
+  cat > "$PERMISSIONS_FILE" <<EOF
+[
+  {
+    "permission": "operator",
+    "xuid": "2535439809227743"
+  }
+]
+EOF
+fi
+# -------------------------------------------------------
+
 echo "Starting server..."
 
 if command -v send-command >/dev/null 2>&1; then
@@ -120,8 +140,6 @@ if command -v send-command >/dev/null 2>&1; then
     echo "Applying gamerules..."
     send-command gamerule showcoordinates true || echo "WARN: failed to set showcoordinates"
     send-command gamerule mobgriefing false || echo "WARN: failed to set mobgriefing"
-    echo "Adding operator..."
-    send-command op "PH PH03NIX" || echo "WARN: failed to op player"
   ) &
 fi
 
