@@ -11,24 +11,23 @@ services:
 
     environment:
       EULA: "TRUE"
-
       SERVER_NAME: "Joy Minecraft"
       GAMEMODE: "survival"
       DIFFICULTY: "normal"
       MAX_PLAYERS: "10"
       ONLINE_MODE: "true"
-
       LEVEL_NAME: "world"
       LEVEL_SEED: "888880777356331877"
-
       VIEW_DISTANCE: "16"
       TICK_DISTANCE: "4"
-      ALLOW_CHEATS: "false"
-
+      ALLOW_CHEATS: "true"
       TZ: "Asia/Manila"
 
     volumes:
-      - ./data:/data
+      - bedrock_data:/data
       - ./packs:/packs:ro
 
     entrypoint: ["/usr/local/bin/entrypoint-demoter", "--match", "/data", "--debug", "--stdin-on-term", "stop", "/entrypoint.sh"]
+
+volumes:
+  bedrock_data:
