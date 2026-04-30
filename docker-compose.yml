@@ -18,7 +18,7 @@ services:
       ONLINE_MODE: "true"
       LEVEL_NAME: "world"
       LEVEL_SEED: "888880777356331877"
-      VIEW_DISTANCE: "16"
+      VIEW_DISTANCE: "8"
       TICK_DISTANCE: "4"
       ALLOW_CHEATS: "true"
       TZ: "Asia/Manila"
