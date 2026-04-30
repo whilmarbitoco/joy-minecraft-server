@@ -11,23 +11,59 @@ services:
 
     environment:
       EULA: "TRUE"
+      TZ: "Asia/Manila"
+      # --- General Server Settings ---
       SERVER_NAME: "Joy Minecraft"
       GAMEMODE: "survival"
+      FORCE_GAMEMODE: "false"
       DIFFICULTY: "normal"
+      ALLOW_CHEATS: "true"
       MAX_PLAYERS: "10"
       ONLINE_MODE: "true"
+      WHITE_LIST: "false"
+      VIEW_DISTANCE: "6"
+      TICK_DISTANCE: "4"
+      PLAYER_IDLE_TIMEOUT: "10"
+      MAX_THREADS: "4"
+
+      # --- Level Settings ---
       LEVEL_NAME: "world"
       LEVEL_SEED: "888880777356331877"
-      VIEW_DISTANCE: "8"
-      TICK_DISTANCE: "4"
-      ALLOW_CHEATS: "true"
-      TZ: "Asia/Manila"
+      DEFAULT_PLAYER_PERMISSION_LEVEL: "member"
+      TEXTUREPACK_REQUIRED: "false"
+
+      # --- Movement & Performance ---
+      SERVER_AUTHORITATIVE_MOVEMENT: "client-auth"
+      PLAYER_MOVEMENT_SCORE_THRESHOLD: "20"
+      PLAYER_MOVEMENT_DISTANCE_THRESHOLD: "0.3"
+      PLAYER_MOVEMENT_DURATION_THRESHOLD_IN_MS: "500"
+      CORRECT_PLAYER_MOVEMENT: "true"
+      COMPRESSION_THRESHOLD: "256"
+
+      # --- Spawn Limits ---
+      SPAWN_LIMITS_MONSTERS: "50"
+      SPAWN_LIMITS_ANIMALS: "20"
+      SPAWN_LIMITS_WATER_ANIMALS: "10"
+      SPAWN_LIMITS_AMBIENT: "10"
+
+      # --- Extra ---
+      CONTENT_LOG_FILE_ENABLED: "false"
+      EMIT_SERVER_TELEMETRY: "true"
 
     volumes:
       - bedrock_data:/data
       - ./packs:/packs:ro
 
-    entrypoint: ["/usr/local/bin/entrypoint-demoter", "--match", "/data", "--debug", "--stdin-on-term", "stop", "/entrypoint.sh"]
+    entrypoint:
+      [
+        "/usr/local/bin/entrypoint-demoter",
+        "--match",
+        "/data",
+        "--debug",
+        "--stdin-on-term",
+        "stop",
+        "/entrypoint.sh",
+      ]
 
 volumes:
   bedrock_data:
